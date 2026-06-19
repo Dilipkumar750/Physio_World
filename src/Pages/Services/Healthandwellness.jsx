@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
   FaTint, FaUserCheck, FaCoffee, FaSun, 
   FaFire, FaDumbbell, FaSnowflake, FaCalendarCheck,
@@ -82,150 +83,396 @@ const HealthAndWellness = () => {
     }
   ];
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const pulseAnimation = {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const floatAnimation = {
+    y: [0, -8, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const iconRotate = {
+    hover: {
+      rotate: 360,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const healthyHabits = [
+    { icon: <FaAppleAlt />, text: "Eat a balanced diet rich in fruits and vegetables", color: "bg-green-100", iconColor: "text-green-600" },
+    { icon: <FaHeartbeat />, text: "Get 7-8 hours of quality sleep each night", color: "bg-blue-100", iconColor: "text-blue-600" },
+    { icon: <GiMeditation />, text: "Practice mindfulness or meditation daily", color: "bg-purple-100", iconColor: "text-purple-600" },
+    { icon: <MdOutlineEmojiPeople />, text: "Stay socially connected with loved ones", color: "bg-orange-100", iconColor: "text-orange-600" },
+    { icon: <FaMusic />, text: "Incorporate stretching into your daily routine", color: "bg-teal-100", iconColor: "text-teal-600" },
+    { icon: <GiMuscleUp />, text: "Strength train at least twice a week", color: "bg-red-100", iconColor: "text-red-600" }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-blue-50 overflow-x-hidden">
       <div className="container mx-auto px-4 mt-10 pb-12">
         
         {/* General Wellness Section */}
-        <div className="mb-10">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full shadow-lg mb-3">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-10"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <motion.div 
+              animate={pulseAnimation}
+              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full shadow-lg mb-3"
+            >
               <FaLeaf className="text-white text-2xl" />
-            </div>
-            <h2 className="text-3xl font-bold text-[#0a2540]">General Wellness Tips</h2>
-            <p className="text-gray-600 mt-2">Everyday habits for a healthier lifestyle</p>
-          </div>
+            </motion.div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-3xl font-bold text-[#0a2540]"
+            >
+              General Wellness Tips
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-gray-600 mt-2"
+            >
+              Everyday habits for a healthier lifestyle
+            </motion.p>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {generalTips.map((tip) => (
-              <div
+              <motion.div
                 key={tip.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+                variants={cardVariants}
+                whileHover={{ y: -8, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group"
               >
-                <div className={`bg-gradient-to-r ${tip.color} p-4 flex items-center gap-3`}>
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white text-xl">
+                <motion.div 
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className={`bg-gradient-to-r ${tip.color} p-4 flex items-center gap-3`}
+                >
+                  <motion.div 
+                    variants={iconRotate}
+                    whileHover="hover"
+                    className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white text-xl"
+                  >
                     {tip.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-white font-bold text-lg flex-1">{tip.title}</h3>
-                </div>
-                <div className="p-5">
-                  <p className="text-gray-600 text-sm mb-3 leading-relaxed">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="p-5"
+                >
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-gray-600 text-sm mb-3 leading-relaxed"
+                  >
                     {tip.description}
-                  </p>
-                  <div className="bg-teal-50 rounded-lg p-3">
+                  </motion.p>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-teal-50 rounded-lg p-3 transition-all duration-300"
+                  >
                     <p className="text-xs text-teal-700">
                       <span className="font-semibold">💡 Why it matters:</span> {tip.benefit}
                     </p>
-                  </div>
-                </div>
-              </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Exercise Tips Section */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-lg mb-3">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-12"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-center mb-8"
+          >
+            <motion.div 
+              animate={floatAnimation}
+              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-lg mb-3"
+            >
               <FaRunning className="text-white text-2xl" />
-            </div>
-            <h2 className="text-3xl font-bold text-[#0a2540]">Exercise Tips</h2>
-            <p className="text-gray-600 mt-2">Smart ways to stay active and injury-free</p>
-          </div>
+            </motion.div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-3xl font-bold text-[#0a2540]"
+            >
+              Exercise Tips
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-600 mt-2"
+            >
+              Smart ways to stay active and injury-free
+            </motion.p>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {exerciseTips.map((tip) => (
-              <div
+              <motion.div
                 key={tip.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+                variants={cardVariants}
+                whileHover={{ y: -8, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group"
               >
-                <div className={`bg-gradient-to-r ${tip.color} p-4 flex items-center gap-3`}>
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white text-xl">
+                <motion.div 
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className={`bg-gradient-to-r ${tip.color} p-4 flex items-center gap-3`}
+                >
+                  <motion.div 
+                    variants={iconRotate}
+                    whileHover="hover"
+                    className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white text-xl"
+                  >
                     {tip.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-white font-bold text-lg flex-1">{tip.title}</h3>
-                </div>
-                <div className="p-5">
-                  <p className="text-gray-600 text-sm mb-3 leading-relaxed">
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="p-5"
+                >
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-gray-600 text-sm mb-3 leading-relaxed"
+                  >
                     {tip.description}
-                  </p>
-                  <div className="bg-teal-50 rounded-lg p-3">
+                  </motion.p>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-teal-50 rounded-lg p-3 transition-all duration-300"
+                  >
                     <p className="text-xs text-teal-700">
                       <span className="font-semibold">💡 Why it matters:</span> {tip.benefit}
                     </p>
-                  </div>
-                </div>
-              </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Healthy Habits Section */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full shadow-lg mb-3">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-12"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mb-8"
+          >
+            <motion.div 
+              animate={pulseAnimation}
+              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full shadow-lg mb-3"
+            >
               <FaSmile className="text-white text-2xl" />
-            </div>
-            <h2 className="text-3xl font-bold text-[#0a2540]">Healthy Habits for Life</h2>
-            <p className="text-gray-600 mt-2">Simple habits that make a big difference</p>
-          </div>
+            </motion.div>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-3xl font-bold text-[#0a2540]"
+            >
+              Healthy Habits for Life
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-gray-600 mt-2"
+            >
+              Simple habits that make a big difference
+            </motion.p>
+          </motion.div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                <FaAppleAlt className="text-green-600" />
-              </div>
-              <span className="text-gray-700">Eat a balanced diet rich in fruits and vegetables</span>
-            </div>
-            
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <FaHeartbeat className="text-blue-600" />
-              </div>
-              <span className="text-gray-700">Get 7-8 hours of quality sleep each night</span>
-            </div>
-            
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                <GiMeditation className="text-purple-600" />
-              </div>
-              <span className="text-gray-700">Practice mindfulness or meditation daily</span>
-            </div>
-            
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                <MdOutlineEmojiPeople className="text-orange-600" />
-              </div>
-              <span className="text-gray-700">Stay socially connected with loved ones</span>
-            </div>
-            
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
-                <FaMusic className="text-teal-600" />
-              </div>
-              <span className="text-gray-700">Incorporate stretching into your daily routine</span>
-            </div>
-            
-            <div className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                <GiMuscleUp className="text-red-600" />
-              </div>
-              <span className="text-gray-700">Strength train at least twice a week</span>
-            </div>
-          </div>
-        </div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            {healthyHabits.map((habit, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ x: 8, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+              >
+                <motion.div 
+                  whileHover={{ rotate: 20, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                  className={`w-10 h-10 ${habit.color} rounded-full flex items-center justify-center flex-shrink-0`}
+                >
+                  <span className={habit.iconColor}>{habit.icon}</span>
+                </motion.div>
+                <span className="text-gray-700 text-sm">{habit.text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-[#0a2540] via-teal-600 to-[#0a2540] rounded-2xl p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-3">Ready to Transform Your Health?</h2>
-          <p className="mb-6 text-teal-100">Book a consultation with our expert physiotherapists today</p>
-          <Link to="/appointments">
-            <button className="bg-white text-[#0a2540] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 shadow-lg">
-              <FaCalendarCheck />
-              Book Appointment
-            </button>
-          </Link>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-gradient-to-r from-[#0a2540] via-teal-600 to-[#0a2540] rounded-2xl p-8 text-center text-white relative overflow-hidden"
+        >
+          <motion.div 
+            animate={floatAnimation}
+            className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl"
+          ></motion.div>
+          <motion.div 
+            animate={floatAnimation}
+            className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl"
+            style={{ animationDelay: '1.5s' }}
+          ></motion.div>
+          
+          <div className="relative z-10">
+            <motion.h2 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.9 }}
+              className="text-2xl font-bold mb-3"
+            >
+              Ready to Transform Your Health?
+            </motion.h2>
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="mb-6 text-teal-100"
+            >
+              Book a consultation with our expert physiotherapists today
+            </motion.p>
+            <Link to="/appointments">
+              <motion.button 
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-[#0a2540] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center gap-2 shadow-lg"
+              >
+                <FaCalendarCheck />
+                Book Appointment
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <FaArrowRight />
+                </motion.span>
+              </motion.button>
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

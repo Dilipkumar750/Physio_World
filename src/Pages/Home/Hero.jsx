@@ -1,365 +1,531 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
-  FaCheckCircle, FaPhoneAlt, FaStar, FaUsers, FaAward, 
-  FaCalendarAlt, FaWhatsapp, FaChevronLeft, FaChevronRight,
-  FaShieldAlt, FaClock, FaHandHoldingHeart, FaSmile, FaArrowRight,
-  FaHome, FaAmbulance, FaUserMd, FaRegCalendarCheck
+  FaStar, FaUsers, 
+  FaCalendarAlt, FaWhatsapp, 
+  FaClock, FaArrowRight,
+  FaHome, FaUserMd, FaRegCalendarCheck,
+  FaShieldAlt, FaAward
 } from 'react-icons/fa';
 import { GiHealing, GiMuscleUp, GiRunningShoe } from 'react-icons/gi';
 import SpecializedServices from './SpecializedServices';
-import knee_pain from '../../assets/knee_pain.jpg';
-import back_pain from '../../assets/back_pain.webp';
-import image3 from '../../assets/image3.jpg';
-import image5 from '../../assets/image5.jpeg';
-import homecare from '../../assets/homecare.png';
+import clinic from '../../assets/clinic.png';
+import homecare from '../../assets/logo.png';
+import TestimonialsHero from './TestimonialsHero';
 
 const Hero = () => {
-
   const highlightPoints = [
-    { icon: <GiHealing className="text-teal-500" />, text: "Pain Management", highlight: true },
-    { icon: <GiMuscleUp className="text-teal-500" />, text: "Muscle Recovery", highlight: true },
-    { icon: <GiHealing className="text-teal-500" />, text: "Spine Care", highlight: true },
-    { icon: <GiRunningShoe className="text-teal-500" />, text: "Sports Rehab", highlight: true }
+    { icon: <GiHealing className="text-teal-500" />, text: "Pain Management" },
+    { icon: <GiMuscleUp className="text-teal-500" />, text: "Muscle Recovery" },
+    { icon: <GiHealing className="text-teal-500" />, text: "Spine Care" },
+    { icon: <GiRunningShoe className="text-teal-500" />, text: "Sports Rehab" }
   ];
 
-  // Scrolling images data
-  const heroImages = [
-    { id: 1, url: knee_pain, alt: "Professional Knee Pain Treatment" },
-    { id: 2, url: back_pain, alt: "Expert Back Pain Therapy" },
-    { id: 3, url: image3, alt: "Exercise Rehabilitation Program" },
-    { id: 4, url: image5, alt: "Complete Recovery Journey" }
-  ];
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
-
-  // Auto-scroll images every 4 seconds (pause on hover)
-  useEffect(() => {
-    if (isHovering) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [heroImages.length, isHovering]);
-
-  const goToPreviousImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
-    );
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
   };
 
-  const goToNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
-    );
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
   };
 
-  const goToImage = (index) => {
-    setCurrentImageIndex(index);
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const pulseAnimation = {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const floatAnimation = {
+    y: [0, -8, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const scaleOnHover = {
+    scale: 1.05,
+    transition: { duration: 0.3 }
+  };
+
+  const iconRotate = {
+    hover: {
+      rotate: 360,
+      transition: { duration: 0.6 }
+    }
   };
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="min-h-[600px] bg-gradient-to-br from-white via-teal-50/30 to-white overflow-hidden">
-        <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
-          
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            {/* Left Side - Enhanced Content */}
-            <div className="flex-1 text-center lg:text-left">
+      <section className="min-h-[500px] sm:min-h-[600px] bg-gradient-to-br from-slate-50 via-white to-teal-50/30 overflow-hidden relative">
+        {/* Background Decorative Elements with Animations */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent"
+        ></motion.div>
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute bottom-0 left-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-teal-400/5 rounded-full blur-3xl"
+        ></motion.div>
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute top-10 sm:top-20 right-10 sm:right-20 w-32 sm:w-48 h-32 sm:h-48 bg-cyan-400/5 rounded-full blur-3xl"
+          style={{ animationDelay: '1.5s' }}
+        ></motion.div>
+
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:py-12 lg:py-16 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            
+            {/* Left Side - Content */}
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex-[2] w-full text-center lg:text-left"
+            >
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-4 py-2 rounded-full mb-5 shadow-sm">
-                <span className="w-2 h-2 bg-teal-600 rounded-full animate-pulse"></span>
-                <span className="text-sm font-bold">⭐ India's Most Trusted Physiotherapy Clinic</span>
-              </div>
+              <motion.div 
+                variants={itemVariants}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-cyan-100 text-teal-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm border border-teal-200/50"
+              >
+                <motion.span 
+                  animate={pulseAnimation}
+                  className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-teal-600 rounded-full"
+                ></motion.span>
+                <span className="text-xs sm:text-sm font-bold">⭐ India's Most Trusted Physiotherapy Clinic</span>
+              </motion.div>
               
               {/* Main Headline */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight">
+              <motion.h1 
+                variants={itemVariants}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-3 sm:mb-5 leading-tight"
+              >
                 <span className="text-[#0a2540]">Get Back to </span>
                 <span className="bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent">Pain-Free Living</span>
-              </h1>
+              </motion.h1>
               
               {/* Subheadline */}
-              <p className="text-xl md:text-2xl text-gray-700 font-bold mb-3">
-                Expert Physiotherapy That Actually Works
-              </p>
+              <motion.p 
+                variants={itemVariants}
+                className="text-lg sm:text-xl md:text-2xl text-gray-700 font-bold mb-2 sm:mb-3 flex items-center justify-center lg:justify-start gap-2"
+              >
+                <span>Expert Physiotherapy That Actually Works</span>
+                <motion.span 
+                  animate={pulseAnimation}
+                  className="text-teal-500 text-xl sm:text-2xl"
+                >
+                  ✨
+                </motion.span>
+              </motion.p>
               
               {/* Description */}
-              <p className="text-gray-600 mb-6 leading-relaxed text-base">
+              <motion.p 
+                variants={itemVariants}
+                className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed max-w-xl mx-auto lg:mx-0"
+              >
                 Join <span className="font-bold text-teal-600">5000+ happy patients</span> who've reclaimed their active lifestyle. 
                 Our certified therapists combine advanced technology with compassionate care to deliver 
-                <span className="font-semibold"> 98% successful recovery rates</span>.
-              </p>
+                <span className="font-semibold text-teal-700"> exceptional recovery outcomes</span>.
+              </motion.p>
               
               {/* Highlight Points */}
-              <div className="flex flex-wrap gap-3 mb-6 justify-center lg:justify-start">
+              <motion.div 
+                variants={itemVariants}
+                className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 justify-center lg:justify-start"
+              >
                 {highlightPoints.map((point, index) => (
-                  <div key={index} className="flex items-center gap-1.5 bg-teal-50 px-3 py-1.5 rounded-full">
-                    <span className="text-teal-500 text-sm">{point.icon}</span>
-                    <span className="text-gray-700 text-sm font-medium">{point.text}</span>
+                  <motion.div 
+                    key={index}
+                    whileHover={{ y: -2, scale: 1.05 }}
+                    className="group flex items-center gap-1 sm:gap-2 bg-white/80 backdrop-blur-sm border border-teal-100 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full shadow-sm hover:shadow-md hover:border-teal-300 transition-all duration-300"
+                  >
+                    <motion.span 
+                      whileHover={{ rotate: 20 }}
+                      className="text-teal-500 text-xs sm:text-sm group-hover:scale-110 transition-transform"
+                    >
+                      {point.icon}
+                    </motion.span>
+                    <span className="text-gray-700 text-xs sm:text-sm font-medium">{point.text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+              
+              {/* CTA Buttons */}
+              <motion.div 
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
+              >
+                <Link to="/appointments" className="w-full sm:w-auto">
+                  <motion.button 
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group w-full sm:w-auto bg-gradient-to-r from-teal-600 to-cyan-500 hover:from-teal-700 hover:to-cyan-600 text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
+                  >
+                    <FaCalendarAlt />
+                    Book Consultation
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <FaArrowRight />
+                    </motion.span>
+                  </motion.button>
+                </Link>
+                <a href="https://wa.me/917904818494" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                  <motion.button 
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto border-2 border-teal-500 text-teal-600 hover:bg-teal-50 hover:border-teal-600 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full font-bold transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-md text-sm sm:text-base"
+                  >
+                    <motion.span
+                      whileHover={{ rotate: 10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FaWhatsapp className="text-lg sm:text-xl" />
+                    </motion.span>
+                    Chat on WhatsApp
+                  </motion.button>
+                </a>
+              </motion.div>
+              
+              {/* Social Proof */}
+              <motion.div 
+                variants={itemVariants}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-8"
+              >
+                <motion.div 
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  className="flex items-center gap-1 sm:gap-2 bg-white/60 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-100"
+                >
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.3, rotate: 10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <FaStar className="text-yellow-400 text-xs sm:text-sm" />
+                      </motion.div>
+                    ))}
                   </div>
+                  <span className="text-xs sm:text-sm font-bold text-gray-700">4.8/5</span>
+                  <span className="text-[10px] sm:text-xs text-gray-500">(Google Reviews)</span>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  className="flex items-center gap-1 sm:gap-2 bg-white/60 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-100"
+                >
+                  <FaUsers className="text-teal-500 text-xs sm:text-sm" />
+                  <span className="text-xs sm:text-sm font-bold text-gray-700">5000+ Happy Patients</span>
+                </motion.div>
+                <motion.div 
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  className="flex items-center gap-1 sm:gap-2 bg-white/60 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-100"
+                >
+                  <FaClock className="text-teal-500 text-xs sm:text-sm" />
+                  <span className="text-xs sm:text-sm font-bold text-gray-700">Same-Day Appointments</span>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+            
+            {/* Right Side - Clinic Image */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex-1 w-full lg:w-auto"
+            >
+              <div className="relative w-full max-w-2xl mx-auto lg:max-w-none">
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 aspect-square sm:aspect-video lg:aspect-auto"
+                >
+                  <motion.img 
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.7 }}
+                    src={clinic} 
+                    alt="Physiotherapy Clinic - Professional Care" 
+                    className="w-full h-full object-fit"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="py-6 sm:py-8 md:py-10 bg-gradient-to-r from-[#0a2540] to-teal-800 text-white relative overflow-hidden"
+      >
+        {/* Decorative background circles */}
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute top-0 right-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-teal-400/10 rounded-full blur-2xl"
+        ></motion.div>
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute bottom-0 left-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-cyan-400/10 rounded-full blur-2xl"
+          style={{ animationDelay: '1.5s' }}
+        ></motion.div>
+        
+        <div className="container mx-auto px-3 sm:px-4 relative z-10">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+          >
+            {[
+              { value: "5000+", label: "Happy Patients Recovered", icon: <FaUsers className="text-teal-300 text-xs sm:text-sm" />, short: "Happy Patients" },
+              { value: "4.8/5", label: "Google Rating", icon: <FaStar className="text-yellow-400 text-xs sm:text-sm" />, short: "Rating" },
+              { value: "4+ Years", label: "Trusted Healthcare Excellence", icon: <FaShieldAlt className="text-teal-300 text-xs sm:text-sm" />, short: "Trusted Excellence" },
+              { value: "15+ Years", label: "Expert Physiotherapist", icon: <FaUserMd className="text-teal-300 text-xs sm:text-sm" />, short: "Expert PT" }
+            ].map((stat, index) => (
+              <motion.div 
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="text-center group transition-transform duration-300"
+              >
+                <motion.h3 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black"
+                >
+                  {stat.value}
+                </motion.h3>
+                <p className="text-teal-100 text-xs sm:text-sm font-medium mt-1 flex items-center justify-center gap-1">
+                  {stat.icon}
+                  <span className="hidden xs:inline">{stat.label}</span>
+                  <span className="inline xs:hidden">{stat.short}</span>
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Specialized Services Component */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <SpecializedServices />
+      </motion.div>
+
+      {/* Home Visit Services Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="py-10 sm:py-12 md:py-16 bg-gradient-to-br from-teal-50 to-cyan-50 relative overflow-hidden"
+      >
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute top-20 left-10 w-64 h-64 bg-teal-200/20 rounded-full blur-3xl"
+        ></motion.div>
+        <motion.div 
+          animate={floatAnimation}
+          className="absolute bottom-20 right-10 w-64 h-64 bg-cyan-200/20 rounded-full blur-3xl"
+          style={{ animationDelay: '1.5s' }}
+        ></motion.div>
+
+        <div className="container mx-auto px-3 sm:px-4 relative z-10">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center mb-8 sm:mb-10 md:mb-12"
+          >
+            <motion.div 
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-cyan-100 text-teal-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 shadow-sm border border-teal-200/50"
+            >
+              <FaHome className="text-teal-600 text-xs sm:text-sm" />
+              <span className="text-xs sm:text-sm font-semibold">Convenient Care at Your Doorstep</span>
+            </motion.div>
+            <motion.h2 
+              variants={itemVariants}
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0a2540] mb-2 sm:mb-3 md:mb-4"
+            >
+              Physiotherapy at <span className="text-teal-600">Home</span>
+            </motion.h2>
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: 64 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mb-3 sm:mb-4 md:mb-6 rounded-full"
+            ></motion.div>
+            <motion.p 
+              variants={itemVariants}
+              className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2"
+            >
+              Can't visit the clinic? Our expert therapists come to your home for personalized rehabilitation
+            </motion.p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+            {/* Left Side - Content */}
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-6 sm:mb-8">
+                {[
+                  { icon: <FaUserMd />, title: "Expert Home Visit", desc: "Certified physiotherapists with specialized home care training" },
+                  { icon: <FaClock />, title: "Flexible Timings", desc: "Morning, evening & weekend slots as per your schedule" },
+                  { icon: <GiHealing />, title: "Equipment Support", desc: "Portable therapy equipment brought to your home" },
+                  { icon: <FaRegCalendarCheck />, title: "Personalized Plans", desc: "Customized home exercise programs for faster recovery" }
+                ].map((card, index) => (
+                  <motion.div 
+                    key={index}
+                    variants={itemVariants}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="bg-white rounded-xl p-4 sm:p-5 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-teal-200"
+                  >
+                    <motion.div 
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-3 sm:mb-4"
+                    >
+                      <span className="text-white text-base sm:text-xl">{card.icon}</span>
+                    </motion.div>
+                    <h3 className="font-bold text-[#0a2540] text-base sm:text-lg mb-1 sm:mb-2">{card.title}</h3>
+                    <p className="text-gray-500 text-xs sm:text-sm">{card.desc}</p>
+                  </motion.div>
                 ))}
               </div>
               
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Link to="/appointments">
-                  <button className="group bg-gradient-to-r from-teal-600 to-cyan-500 hover:from-teal-700 hover:to-cyan-600 text-white px-7 py-3.5 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2">
-                    <FaCalendarAlt />
-                    Book Free Consultation
-                    <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </Link>
-                <a href="https://wa.me/917904818494" target="_blank" rel="noopener noreferrer">
-                  <button className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-7 py-3.5 rounded-full font-bold transition-all duration-300 flex items-center gap-2">
-                    <FaWhatsapp className="text-xl" />
-                    Chat on WhatsApp
-                  </button>
-                </a>
-              </div>
-              
-              {/* Social Proof */}
-              <div className="flex flex-wrap items-center gap-5 mt-8 justify-center lg:justify-start">
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar key={i} className="text-yellow-400 text-sm" />
-                    ))}
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700">4.9/5</span>
-                  <span className="text-xs text-gray-500">(500+ reviews)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaUsers className="text-teal-500" />
-                  <span className="text-sm font-semibold text-gray-700">5000+ Happy Patients</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaClock className="text-teal-500" />
-                  <span className="text-sm font-semibold text-gray-700">Same-Day Appointments</span>
-                </div>
-              </div>
-              
-              {/* Trust Badges */}
-              <div className="flex flex-wrap gap-4 mt-6 justify-center lg:justify-start">
-                <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                  <FaShieldAlt className="text-green-500" />
-                  <span>ISO Certified</span>
-                </div>
-                <div className="w-px h-3 bg-gray-300"></div>
-                <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                  <FaHandHoldingHeart className="text-teal-500" />
-                  <span>Patient First Approach</span>
-                </div>
-                <div className="w-px h-3 bg-gray-300"></div>
-                <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                  <FaSmile className="text-orange-400" />
-                  <span>100% Satisfaction Guaranteed</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Right Side - Enhanced Image Carousel */}
-            <div 
-              className="flex-1 relative"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                {/* Main Image */}
-                <img 
-                  src={heroImages[currentImageIndex].url}
-                  alt={heroImages[currentImageIndex].alt}
-                  className="w-full h-[380px] md:h-[480px] object-cover transition-all duration-700 ease-in-out transform hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
-                
-                {/* Image Counter Badge */}
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full">
-                  {currentImageIndex + 1} / {heroImages.length}
-                </div>
-                
-                {/* Previous Button */}
-                <button 
-                  onClick={goToPreviousImage}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-teal-500 backdrop-blur-sm text-white w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                >
-                  <FaChevronLeft />
-                </button>
-                
-                {/* Next Button */}
-                <button 
-                  onClick={goToNextImage}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-teal-500 backdrop-blur-sm text-white w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                >
-                  <FaChevronRight />
-                </button>
-                
-                {/* Dots Indicator */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                  {heroImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToImage(index)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex 
-                          ? 'bg-teal-400 w-6' 
-                          : 'bg-white/50 w-1.5 hover:bg-white/80'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              {/* Floating Emergency Card */}
-              <div className="absolute -bottom-5 -left-4 bg-white rounded-xl shadow-xl p-3 hidden lg:block">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center animate-pulse">
-                    <FaPhoneAlt className="text-white text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-gray-500 font-medium">🚨 24/7 Emergency Support</p>
-                    <p className="font-bold text-[#0a2540] text-base">+91 79048 18494</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Success Rate Badge */}
-              <div className="absolute -top-3 -right-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full w-20 h-20 flex flex-col items-center justify-center shadow-lg hidden lg:flex">
-                <span className="text-white font-black text-xl">98%</span>
-                <span className="text-white text-[10px] font-semibold">Success Rate</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced Stats Section */}
-      <section className="py-10 bg-gradient-to-r from-[#0a2540] to-teal-800 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <h3 className="text-3xl md:text-4xl font-black">5000+</h3>
-              <p className="text-teal-100 text-sm font-medium mt-1">Happy Patients Recovered</p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-3xl md:text-4xl font-black">98%</h3>
-              <p className="text-teal-100 text-sm font-medium mt-1">Treatment Success Rate</p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-3xl md:text-4xl font-black">15+</h3>
-              <p className="text-teal-100 text-sm font-medium mt-1">Expert Physiotherapists</p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-3xl md:text-4xl font-black">4+ Years</h3>
-              <p className="text-teal-100 text-sm font-medium mt-1">Trusted Healthcare Excellence</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Home Visit Services Section - NEW */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 to-cyan-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-4 py-2 rounded-full mb-4">
-              <FaHome className="text-teal-600" />
-              <span className="text-sm font-semibold">Convenient Care at Your Doorstep</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0a2540] mb-4">
-              Physiotherapy at <span className="text-teal-600">Home</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mb-6"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Can't visit the clinic? Our expert therapists come to your home for personalized rehabilitation
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Content */}
-            <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                    <FaUserMd className="text-white text-xl" />
-                  </div>
-                  <h3 className="font-bold text-[#0a2540] text-lg mb-2">Expert Home Visit</h3>
-                  <p className="text-gray-500 text-sm">Certified physiotherapists with specialized home care training</p>
-                </div>
-                
-                <div className="bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                    <FaClock className="text-white text-xl" />
-                  </div>
-                  <h3 className="font-bold text-[#0a2540] text-lg mb-2">Flexible Timings</h3>
-                  <p className="text-gray-500 text-sm">Morning, evening & weekend slots available as per your schedule</p>
-                </div>
-                
-                <div className="bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                    <GiHealing className="text-white text-xl" />
-                  </div>
-                  <h3 className="font-bold text-[#0a2540] text-lg mb-2">Full Equipment Support</h3>
-                  <p className="text-gray-500 text-sm">We bring portable therapy equipment to your home</p>
-                </div>
-                
-                <div className="bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                    <FaRegCalendarCheck className="text-white text-xl" />
-                  </div>
-                  <h3 className="font-bold text-[#0a2540] text-lg mb-2">Personalized Plans</h3>
-                  <p className="text-gray-500 text-sm">Customized home exercise programs for faster recovery</p>
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-r from-teal-600 to-cyan-500 rounded-xl p-6 text-white text-center">
-                <p className="text-lg font-semibold mb-3">🏠 Home Visit Available in:</p>
-                <p className="text-sm opacity-90">Perambur • Peravallur • Kolathur • Villivakkam • Ayanavaram • and surrounding areas</p>
-                <div className="mt-4 flex justify-center gap-3">
-                  <Link to="/appointments">
-                    <button className="bg-white text-teal-600 px-5 py-2 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center gap-2">
+              <motion.div 
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                className="bg-gradient-to-r from-teal-600 to-cyan-500 rounded-xl p-4 sm:p-5 md:p-6 text-white text-center shadow-xl"
+              >
+                <p className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">🏠 Home Visit Available in:</p>
+                <p className="text-xs sm:text-sm opacity-90 px-2">Perambur • Peravallur • Kolathur • Villivakkam • Madavaram • Anna Nagar • Ayanavaram • and surrounding areas</p>
+                <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 flex-wrap">
+                  <Link to="/appointments" className="w-full sm:w-auto">
+                    <motion.button 
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full sm:w-auto bg-white text-teal-600 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base"
+                    >
                       <FaCalendarAlt />
                       Book Home Visit
-                    </button>
+                    </motion.button>
                   </Link>
-                  <a href="https://wa.me/917904818494" target="_blank" rel="noopener noreferrer">
-                    <button className="border-2 border-white text-white px-5 py-2 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+                  <a href="https://wa.me/917904818494" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                    <motion.button 
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full sm:w-auto border-2 border-white text-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                    >
                       <FaWhatsapp />
                       Enquire Now
-                    </button>
+                    </motion.button>
                   </a>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
             {/* Right Side - Image */}
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img 
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, x: 30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative mt-6 sm:mt-0"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.5 }}
+                className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+              >
+                <motion.img 
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.7 }}
                   src={homecare} 
                   alt="Home Physiotherapy Service" 
-                  className="w-full h-[400px] object-fit transition-transform duration-500 hover:scale-105"
+                  className="w-full h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] object-cover"
                 />
-              </div>
+              </motion.div>
               {/* Floating Badge */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-3 flex items-center gap-2">
-                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center animate-pulse">
-                  <FaWhatsapp className="text-white text-xl" />
-                </div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 bg-white rounded-lg shadow-xl p-2 sm:p-3 flex items-center gap-1 sm:gap-2 border border-gray-100"
+              >
+                <motion.div 
+                  animate={pulseAnimation}
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center"
+                >
+                  <FaWhatsapp className="text-white text-base sm:text-xl" />
+                </motion.div>
                 <div>
-                  <p className="text-xs text-gray-500">Call for Home Visit</p>
-                  <p className="font-bold text-[#0a2540] text-sm">+91 79048 18494</p>
+                  <p className="text-[10px] sm:text-xs text-gray-500">Call for Home Visit</p>
+                  <p className="font-bold text-[#0a2540] text-xs sm:text-sm">+91 79048 18494</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Specialized Services Component */}
-      <SpecializedServices />
+      </motion.section>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      >
+        <TestimonialsHero />
+      </motion.div>
     </div>
   );
 };
