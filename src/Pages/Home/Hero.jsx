@@ -128,7 +128,7 @@ const Hero = () => {
                   animate={pulseAnimation}
                   className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-teal-600 rounded-full"
                 ></motion.span>
-                <span className="text-xs sm:text-sm font-bold">⭐ India's Most Trusted Physiotherapy Clinic</span>
+                <span className="text-xs sm:text-sm font-bold">⭐ Chennai's Most Trusted Physiotherapy Clinic</span>
               </motion.div>
               
               {/* Main Headline */}
