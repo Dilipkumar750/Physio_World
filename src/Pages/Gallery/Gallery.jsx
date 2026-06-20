@@ -20,8 +20,7 @@ import image10 from "../../assets/image05.jpeg";
 import image11 from "../../assets/image06.jpeg";
 import image12 from "../../assets/image07.jpeg";
 import image14 from "../../assets/image08.jpg";
-import image13 from "../../assets/clinic.png";
-
+import image13 from "../../assets/clinic.jpg";
 import Faq from './Faq';
 
 const Gallery = () => {
