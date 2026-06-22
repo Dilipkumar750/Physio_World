@@ -23,11 +23,11 @@ const TestimonialsHero = () => {
     },
     {
       id: 2,
-      name: "Mahalakshmi Sridhar",
-      location: "Chennai",
+      name: "Samuel Jabez S",
+      location: "Kolathur, Chennai",
       rating: 5,
-      date: "April 2, 2026",
-      text: "An excellent therapy center. I got complete relief from my neck pain. Kudos to the doctor couple.",
+      date: "April 22, 2026",
+      text: "Hands down the best physiotherapist in Kolathur, especially for athletes and sports people. I was having back injury for 8 years, which recently flared up into massive spasms while bowling. I could barely walk. Skeptically walked in to his centre and found the best in Kolathur. What I loved about the treatment here is that it wasn't just the traditional IFT/Traction stuff. He immediately got to work on pain management, releasing the tight areas with a massage gun and some stretches. He made me do my bowling action before leaving the clinic on my first day. We did 10 days of solid rehab sessions mostly strength/mobility exercises, using IFT and the massage gun when needed. Now, I'm back to cricket and way more confidence. He genuinely takes the time to find your weak muscle and tailors the plan to your body. Absolutely brilliant. Thanks Sir.",
       verified: true,
       gradientIndex: 1,
       logoIndex: 1

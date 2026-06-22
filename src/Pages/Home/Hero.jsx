@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 import { GiHealing, GiMuscleUp, GiRunningShoe } from 'react-icons/gi';
 import SpecializedServices from './SpecializedServices';
-import clinic from '../../assets/clinic.jpg';
+import clinic from '../../assets/clinic.png';
 import homecare from '../../assets/logo.png';
 import TestimonialsHero from './TestimonialsHero';
 

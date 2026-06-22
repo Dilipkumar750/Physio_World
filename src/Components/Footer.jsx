@@ -133,7 +133,7 @@ const Footer = () => {
             <ul className="space-y-1.5 sm:space-y-2 mt-3 sm:mt-4">
               <li>
                 <Link to="/services" className="text-gray-400 hover:text-teal-400 transition text-xs sm:text-sm block text-center sm:text-left hover:translate-x-1 transition-all duration-300">
-                  Neuro Rehabilitation
+                  Orthopedic Rehabilitation
                 </Link>
               </li>
               <li>

@@ -10,17 +10,15 @@ import {
 import image01 from "../../assets/Gallery/IMG_1455.jpg";
 import image06 from "../../assets/Gallery/IMG_1452.jpg";
 import image02 from "../../assets/Gallery/IMG_0533.jpg";
-import image03 from "../../assets/Gallery/IMG_1472.jpg";
-import image04 from "../../assets/Gallery/IMG_1482.jpg";
-import image05 from "../../assets/Gallery/IMG_1467.jpg";
 import image07 from "../../assets/image01.jpeg";
 import image08 from "../../assets/image02.jpeg";
 import image09 from "../../assets/image03.jpeg";
 import image10 from "../../assets/image05.jpeg";
 import image11 from "../../assets/image06.jpeg";
 import image12 from "../../assets/image07.jpeg";
-import image14 from "../../assets/image08.jpg";
-import image13 from "../../assets/clinic.jpg";
+import image13 from "../../assets/clinic.png";
+import image04 from "../../assets/Gallery/IMG_1482.jpg";
+import image05 from "../../assets/sandhya.jpeg";
 import Faq from './Faq';
 
 const Gallery = () => {
@@ -29,22 +27,20 @@ const Gallery = () => {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [loadedImages, setLoadedImages] = useState({});
 
-  // Gallery Images
+  // Gallery Images - image04 is last, removed IDs 3, 6, 14
   const galleryImages = [
     { id: 1, image: image01 },
     { id: 2, image: image02 },
-    { id: 3, image: image03 },
-    { id: 4, image: image04 },
-    { id: 5, image: image05 },
-    { id: 6, image: image06 },
-    { id: 7, image: image07 },
-    { id: 8, image: image08 },
-    { id: 9, image: image09 },
-    { id: 10, image: image10 },
-    { id: 11, image: image11 },
-    { id: 12, image: image12 },
-    { id: 13, image: image13 },
-    { id: 14, image: image14 }
+    { id: 5, image: image06 },
+    { id: 6, image: image07 },
+    { id: 7, image: image08 },
+    { id: 8, image: image09 },
+    { id: 9, image: image10 },
+    { id: 10, image: image11 },
+    { id: 11, image: image12 },
+    { id: 12, image: image13 },
+    { id: 13, image: image04 }, // image04 moved to last position
+    { id: 14, image: image05 }  // image05 added
   ];
 
   const openLightbox = (image, index) => {
@@ -123,7 +119,6 @@ const Gallery = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 tracking-tight px-2">
               Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-300">Physio World</span> Gallery
             </h1>
@@ -160,7 +155,7 @@ const Gallery = () => {
                   <img
                     src={image.image}
                     alt={`Gallery ${index + 1}`}
-                    className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                    className={`w-full h-full object-fit transition-all duration-700 group-hover:scale-110 ${
                       loadedImages[image.id] ? 'opacity-100' : 'opacity-0'
                     }`}
                     onLoad={() => handleImageLoad(image.id)}

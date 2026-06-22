@@ -1,73 +1,91 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
   FaBrain, FaHeartbeat, FaRunning, 
-  FaChild, FaArrowRight, FaCheckCircle, FaStar, FaClock, FaPhoneAlt, FaCalendarCheck
+  FaChild, FaArrowRight, FaCheckCircle, FaStar, FaClock, FaPhoneAlt, FaCalendarCheck, FaUserMd, FaBone
 } from 'react-icons/fa'
 
 const SpecializedServices = () => {
-  // Only showing 6 services on home page
+  // Only showing 6 services on home page - Reordered as requested
   const services = [
+    // 1. ORTHOPEDIC
     {
       id: 1,
+      title: "Orthopedic Rehabilitation",
+      icon: <FaBone />,
+      description: "Comprehensive care for back pain, neck pain, arthritis, frozen shoulder, knee pain & mobility restoration.",
+      focus: "Pain relief, joint mobility, and functional independence.",
+      methods: "Manual therapy, therapeutic exercises, and joint mobilization.",
+      color: "from-green-500 to-emerald-500",
+      bgColor: "bg-emerald-50",
+      borderColor: "border-emerald-200",
+      link: "/appointments"
+    },
+    // 2. SPORTS & ORTHOPEDIC
+    {
+      id: 2,
+      title: "Sports & Orthopedic Rehabilitation",
+      icon: <FaRunning />,
+      description: "Specialized rehabilitation for sports injuries including ACL tears, muscle strains, ligament injuries, and performance-focused recovery.",
+      focus: "Return to sport safely, prevent re-injury, enhance athletic performance.",
+      methods: "Sport-specific training, strength conditioning, agility drills, and ACL protocols.",
+      color: "from-emerald-500 to-teal-500",
+      bgColor: "bg-teal-50",
+      borderColor: "border-teal-200",
+      link: "/appointments"
+    },
+    // 3. PAIN MANAGEMENT
+    {
+      id: 3,
+      title: "Pain Management Therapy",
+      icon: <FaBrain />,
+      description: "Evidence-based techniques for pain reduction and functional improvement in chronic and acute conditions.",
+      focus: "Back pain, neck pain, frozen shoulder, arthritis, disc issues, and nerve pain.",
+      methods: "Electrotherapy (TENS, IFT, Ultrasound), posture correction, stretching, and ergonomic advice.",
+      color: "from-orange-500 to-red-500",
+      bgColor: "bg-orange-50",
+      borderColor: "border-orange-200",
+      link: "/appointments"
+    },
+    // 4. NEURO REHABILITATION
+    {
+      id: 4,
       title: "Neuro Rehabilitation",
       icon: <FaBrain />,
-      description: "Specialized care for patients with neurological conditions such as spinal cord injury, Parkinson's disease, multiple sclerosis, and nerve injuries.",
+      description: "Specialized care for patients with neurological conditions affecting movement, balance, and function.",
       focus: "Regain mobility, improve balance, and enhance independence.",
       methods: "Task-oriented training, gait training, and functional exercises.",
       color: "from-purple-500 to-pink-500",
-      link: "/services"
+      bgColor: "bg-purple-50",
+      borderColor: "border-purple-200",
+      link: "/appointments"
     },
-    {
-      id: 2,
-      title: "Stroke Rehabilitation",
-      icon: <FaHeartbeat />,
-      description: "Comprehensive program for patients recovering from stroke.",
-      focus: "Restoring muscle strength, speech, balance, and independence.",
-      methods: "Neuroplasticity-based therapy, task training, and occupational retraining.",
-      color: "from-red-500 to-orange-500",
-      link: "/services"
-    },
-    {
-      id: 3,
-      title: "Spinal Cord Injury Rehabilitation",
-      icon: <FaBrain />,
-      description: "Structured care for partial or complete spinal cord injuries.",
-      focus: "Maximizing independence, preventing complications, and long-term wellness.",
-      methods: "Strengthening, assistive device training, bladder & bowel care strategies.",
-      color: "from-blue-500 to-cyan-500",
-      link: "/services"
-    },
-    {
-      id: 4,
-      title: "Sports & Orthopedic Rehabilitation",
-      icon: <FaRunning />,
-      description: "Rehabilitation for athletes and orthopedic conditions.",
-      focus: "ACL tears, rotator cuff injuries, tennis elbow, fractures, post-surgical recovery.",
-      methods: "Manual therapy, strengthening programs, and advanced exercise therapy.",
-      color: "from-green-500 to-emerald-500",
-      link: "/services"
-    },
+    // 5. SENSORY INTEGRATION
     {
       id: 5,
-      title: "Pain Management",
-      icon: <FaBrain />,
-      description: "Drug-free physiotherapy for acute and chronic pain.",
-      focus: "Back pain, neck pain, frozen shoulder, arthritis, disc issues.",
-      methods: "Electrotherapy (TENS, IFT, Ultrasound), posture correction, stretching, ergonomic advice.",
-      color: "from-orange-500 to-red-500",
-      link: "/services"
-    },
-    {
-      id: 6,
       title: "Sensory Integration Therapy",
       icon: <FaChild />,
-      description: "Special therapy for children with sensory processing difficulties (autism, ADHD, developmental delays).",
+      description: "Special therapy for children with sensory processing difficulties including autism, ADHD, and developmental delays.",
       focus: "Improving balance, coordination, and response to sensory input.",
-      methods: "Play-based therapy and sensory-motor activities.",
+      methods: "Play-based therapy, sensory-motor activities, and vestibular training.",
       color: "from-pink-500 to-rose-500",
-      link: "/services"
+      bgColor: "bg-pink-50",
+      borderColor: "border-pink-200",
+      link: "/appointments"
+    },
+    // 6. GERIATRIC
+    {
+      id: 6,
+      title: "Geriatric Physiotherapy (Elderly Care)",
+      icon: <FaUserMd />,
+      description: "Specialized physiotherapy for older adults to maintain independence, mobility, and quality of life.",
+      focus: "Improving mobility, reducing stiffness, preventing falls, and managing arthritis/osteoporosis.",
+      methods: "Balance training, mobility exercises, strengthening, and fall prevention strategies.",
+      color: "from-slate-500 to-gray-500",
+      bgColor: "bg-slate-50",
+      borderColor: "border-slate-200",
+      link: "/appointments"
     }
   ]
 
@@ -119,15 +137,6 @@ const SpecializedServices = () => {
     }
   }
 
-  const pulseAnimation = {
-    scale: [1, 1.05, 1],
-    transition: {
-      duration: 2,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-
   const floatAnimation = {
     y: [0, -8, 0],
     transition: {
@@ -176,8 +185,6 @@ const SpecializedServices = () => {
           animate="visible"
           className="text-center mb-12"
         >
-    
-          
           <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#0a2540] to-teal-600 bg-clip-text text-transparent mb-4">
             Our Specialized Services
           </h2>
@@ -205,14 +212,14 @@ const SpecializedServices = () => {
               variants={cardVariants}
               whileHover={{ y: -8, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+              className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col border-l-4 ${service.borderColor}`}
             >
               {/* Service Header with Gradient */}
               <motion.div 
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className={`bg-gradient-to-r ${service.color} p-4 flex items-center gap-3`}
+                className={`bg-gradient-to-r ${service.color} p-4 flex items-center gap-3 flex-shrink-0`}
               >
                 <motion.div 
                   variants={iconRotate}
@@ -224,18 +231,18 @@ const SpecializedServices = () => {
                 <h3 className="text-white font-bold text-lg flex-1">{service.title}</h3>
               </motion.div>
               
-              {/* Service Body */}
+              {/* Service Body - Flex grow to fill space */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="p-5"
+                className="p-5 flex flex-col flex-1"
               >
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3"
+                  className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3 flex-shrink-0"
                 >
                   {service.description}
                 </motion.p>
@@ -245,10 +252,10 @@ const SpecializedServices = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="mb-3"
+                  className={`mb-3 flex-shrink-0 ${service.bgColor} p-3 rounded-xl`}
                 >
                   <h4 className="font-semibold text-[#0a2540] text-sm mb-1">🎯 Focus:</h4>
-                  <p className="text-gray-500 text-xs line-clamp-2">{service.focus}</p>
+                  <p className="text-gray-700 text-xs line-clamp-2">{service.focus}</p>
                 </motion.div>
                 
                 {/* Methods Section */}
@@ -256,20 +263,23 @@ const SpecializedServices = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                  className="mb-4"
+                  className={`mb-4 flex-shrink-0 ${service.bgColor} p-3 rounded-xl`}
                 >
                   <h4 className="font-semibold text-[#0a2540] text-sm mb-1">📋 Methods:</h4>
-                  <p className="text-gray-500 text-xs line-clamp-2">{service.methods}</p>
+                  <p className="text-gray-700 text-xs line-clamp-2">{service.methods}</p>
                 </motion.div>
                 
-                {/* Read More Button */}
-                <Link to={service.link}>
+                {/* Spacer to push button to bottom */}
+                <div className="flex-1"></div>
+                
+                {/* Book Appointment Button - Fixed at bottom, redirects to appointments */}
+                <Link to={service.link} className="mt-auto">
                   <motion.button 
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className={`w-full bg-gradient-to-r ${service.color} text-white py-2 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg`}
+                    className={`w-full bg-gradient-to-r ${service.color} text-white py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg`}
                   >
-                    Read More
+                    Book Appointment
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
@@ -283,14 +293,14 @@ const SpecializedServices = () => {
           ))}
         </motion.div>
 
-        {/* View All Services Button */}
+        {/* View All Services Button - Now redirects to appointments */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           className="text-center mt-12"
         >
-          <Link to="/services">
+          <Link to="/appointments">
             <motion.button 
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}

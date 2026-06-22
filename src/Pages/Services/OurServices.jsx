@@ -32,7 +32,6 @@ const OurServices = () => {
     { id: 'sensory', name: 'Sensory Integration', icon: <FaChild /> },
     { id: 'fitness', name: 'Fitness & Ergonomics', icon: <FaDumbbell /> },
     { id: 'homecare', name: 'Home Care', icon: <FaHome /> },
-    { id: 'special', name: 'Special Services', icon: <FaFemale /> }
   ]
 
   const services = [
@@ -307,7 +306,7 @@ const OurServices = () => {
     {
       id: 19,
       title: "Pelvic Floor Rehabilitation",
-      category: "special",
+      category: "pediatric",
       icon: <FaFemale />,
       description: "Specialized therapy for men and women with pelvic floor dysfunction and related issues.",
       focus: "Strengthening pelvic muscles, improving bladder control, and restoring pelvic health.",
