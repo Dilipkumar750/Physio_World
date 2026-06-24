@@ -5,7 +5,7 @@ import {
   FaCommentDots, FaStethoscope, FaCheckCircle, FaArrowRight, FaWhatsapp,
   FaBone, FaRunning, FaBrain, FaHeartbeat, FaBaby, FaChild,
   FaFemale, FaHome, FaUserFriends, FaDumbbell, FaUserMd,
-  FaRegSnowflake, FaCalendarCheck, FaWalking, FaInfoCircle
+  FaRegSnowflake, FaCalendarCheck, FaWalking, FaInfoCircle, FaBolt
 } from 'react-icons/fa'
 
 // Import all service images
@@ -21,14 +21,16 @@ import parkinson from '../assets/services/parkinson.jpg'
 import pediatric from '../assets/services/pediatric.webp'
 import pelvic from '../assets/services/pelvic.webp'
 import postFracture from '../assets/services/Post-fracture.jpg'
-import postSurgical from '../assets/services/post-surgical.webp'
+import postSurgical from '../assets/services/post-surgical.jpeg'
 import postural from '../assets/services/postural.jpg'
-import sensory from '../assets/services/sensory.webp'
 import spinal from '../assets/services/spinal.jpg'
 import sportsInjuries from '../assets/services/sportsinjuries.jpg'
 import stroke from '../assets/services/stroke.jpg'
 import orthopedicImg from '../assets/services/orthopedic.jpg'
 import geriatric from '../assets/services/geriatric.jpg'
+// Electrotherapy image
+import electrotherapyImg from '../assets/services/tens.webp'
+
 const Appointments = () => {
   const location = useLocation()
   const [formData, setFormData] = useState({
@@ -56,6 +58,39 @@ const Appointments = () => {
       methods: 'Manual therapy, therapeutic exercises, and joint mobilization.',
       color: 'from-green-500 to-emerald-500',
       category: 'Orthopedic'
+    },
+        // ===== ELECTROTHERAPY - SINGLE SECTION =====
+    'Electrotherapy': {
+      icon: <FaBolt className="text-2xl sm:text-3xl text-yellow-500" />,
+      image: electrotherapyImg,
+      brief: 'Advanced electrotherapy treatments including TENS, IFT, Ultrasound, Traction & Shortwave for effective pain relief and tissue healing.',
+      description: 'Comprehensive electrotherapy services using advanced electrical modalities to treat pain, reduce inflammation, and promote tissue healing. Our expert physiotherapists utilize state-of-the-art equipment for optimal results.',
+      focus: 'Pain relief, muscle relaxation, tissue healing, improved circulation, and spinal decompression.',
+      methods: 'TENS (Transcutaneous Electrical Nerve Stimulation), IFT (Interferential Therapy), Ultrasound Therapy, Traction Therapy, and Shortwave Diathermy.',
+      color: 'from-yellow-500 to-orange-500',
+      category: 'Electrotherapy',
+      modalities: [
+        {
+          name: '⚡ TENS Therapy',
+          description: 'Non-invasive pain relief using low-voltage electrical currents to block pain signals and stimulate endorphin release.'
+        },
+        {
+          name: '⚡ IFT Therapy',
+          description: 'Deep tissue pain relief using medium-frequency electrical currents that penetrate deep into muscles and joints.'
+        },
+        {
+          name: '⚡ Ultrasound Therapy',
+          description: 'Therapeutic ultrasound using high-frequency sound waves to promote tissue healing, reduce inflammation, and relieve pain.'
+        },
+        {
+          name: '⚡ Traction Therapy',
+          description: 'Spinal decompression therapy using controlled mechanical traction to relieve pressure on spinal discs and nerve roots.'
+        },
+        {
+          name: '⚡ Shortwave Diathermy',
+          description: 'Deep tissue heating using electromagnetic waves to increase blood flow, reduce pain, and accelerate healing.'
+        }
+      ]
     },
     'Sports Injury Recovery': {
       icon: <FaRunning className="text-2xl sm:text-3xl text-teal-600" />,
@@ -187,16 +222,6 @@ const Appointments = () => {
       color: 'from-cyan-500 to-blue-500',
       category: 'Pediatric'
     },
-    'Sensory Integration Therapy': {
-      icon: <FaChild className="text-2xl sm:text-3xl text-teal-600" />,
-      image: sensory,
-      brief: 'Special therapy for children with sensory processing difficulties including autism & ADHD.',
-      description: 'Special therapy for children with sensory processing difficulties including autism, ADHD, and developmental delays.',
-      focus: 'Improving balance, coordination, and response to sensory input.',
-      methods: 'Play-based therapy, sensory-motor activities, and vestibular training.',
-      color: 'from-pink-500 to-rose-500',
-      category: 'Sensory'
-    },
     'Ergonomics Training Classes': {
       icon: <FaUserMd className="text-2xl sm:text-3xl text-teal-600" />,
       image: ergonomics,
@@ -246,7 +271,8 @@ const Appointments = () => {
       methods: 'Kegel training, biofeedback, and guided physiotherapy exercises.',
       color: 'from-purple-500 to-indigo-500',
       category: 'Special'
-    }
+    },
+
   }
 
   // Get service from URL query parameter
@@ -449,7 +475,7 @@ ${data.message || 'No additional message'}
                       alt={formData.service}
                       className="w-full h-full object-fit object-center"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/400x300/14b8a6/ffffff?text=Physiotherapy'
+                        e.target.src = 'https://via.placeholder.com/400x300/14b8a6/ffffff?text=Electrotherapy'
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
@@ -491,6 +517,21 @@ ${data.message || 'No additional message'}
                       <h4 className="font-semibold text-[#0a2540] text-xs sm:text-sm mb-0.5 sm:mb-1">📋 Methods</h4>
                       <p className="text-gray-600 text-xs sm:text-sm">{selectedServiceDetails.methods}</p>
                     </div>
+
+                    {/* Modalities - Only for Electrotherapy */}
+                    {selectedServiceDetails.modalities && (
+                      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-yellow-200">
+                        <h4 className="font-semibold text-[#0a2540] text-xs sm:text-sm mb-2">🔋 Treatment Modalities</h4>
+                        <div className="space-y-2">
+                          {selectedServiceDetails.modalities.map((modality, index) => (
+                            <div key={index} className="bg-white rounded-lg p-2 sm:p-3 border border-gray-100 shadow-sm">
+                              <p className="font-semibold text-[#0a2540] text-xs sm:text-sm">{modality.name}</p>
+                              <p className="text-gray-600 text-[10px] sm:text-xs mt-0.5">{modality.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Change Service Button */}
                     <button
@@ -545,27 +586,6 @@ ${data.message || 'No additional message'}
                       {errors.name && <p className="text-red-500 text-[10px] sm:text-xs mt-0.5 sm:mt-1">{errors.name}</p>}
                     </div>
 
-                    {/* Email Field */}
-                    <div>
-                      <label className="block text-gray-700 font-semibold mb-1 sm:mb-2 text-xs sm:text-sm">
-                        Email Address <span className="text-gray-400 text-[10px] sm:text-xs">(Optional)</span>
-                      </label>
-                      <div className="relative">
-                        <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
-                            errors.email ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder="your@email.com"
-                        />
-                      </div>
-                      {errors.email && <p className="text-red-500 text-[10px] sm:text-xs mt-0.5 sm:mt-1">{errors.email}</p>}
-                    </div>
-
                     {/* Phone Field */}
                     <div>
                       <label className="block text-gray-700 font-semibold mb-1 sm:mb-2 text-xs sm:text-sm">
@@ -585,6 +605,27 @@ ${data.message || 'No additional message'}
                         />
                       </div>
                       {errors.phone && <p className="text-red-500 text-[10px] sm:text-xs mt-0.5 sm:mt-1">{errors.phone}</p>}
+                    </div>
+
+                    {/* Email Field */}
+                    <div>
+                      <label className="block text-gray-700 font-semibold mb-1 sm:mb-2 text-xs sm:text-sm">
+                        Email Address <span className="text-gray-400 text-[10px] sm:text-xs">(Optional)</span>
+                      </label>
+                      <div className="relative">
+                        <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
+                            errors.email ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                          placeholder="your@email.com"
+                        />
+                      </div>
+                      {errors.email && <p className="text-red-500 text-[10px] sm:text-xs mt-0.5 sm:mt-1">{errors.email}</p>}
                     </div>
 
                     {/* Service Dropdown */}
@@ -728,7 +769,7 @@ ${data.message || 'No additional message'}
                     <FaClock className="text-white text-xs sm:text-sm" />
                   </div>
                   <h3 className="font-semibold text-[#0a2540] text-[10px] sm:text-xs">Hours</h3>
-                  <p className="text-gray-600 text-[8px] sm:text-[10px]">Mon-Sat 9AM-8PM</p>
+                  <p className="text-gray-600 text-[8px] sm:text-[10px]">Mon-Sat 9AM-10PM</p>
                 </div>
               </div>
             </div>

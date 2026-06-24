@@ -202,8 +202,8 @@ const Footer = () => {
               <li className="flex items-start justify-center sm:justify-start gap-2 sm:gap-3 group">
                 <FaClock className="text-teal-400 text-xs sm:text-sm mt-0.5 group-hover:scale-110 transition-transform duration-300 group-hover:text-cyan-400 flex-shrink-0" />
                 <div className="text-gray-400 text-xs sm:text-sm text-left">
-                  <div>Mon-Sat: 9AM - 8PM</div>
-                  <div>Sun: 10AM - 2PM</div>
+                  <div>Mon-Sat: 9AM - 10PM</div>
+                  <div>Sun: 10AM - 12PM</div>
                 </div>
               </li>
             </ul>

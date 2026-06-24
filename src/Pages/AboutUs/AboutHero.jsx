@@ -11,7 +11,7 @@ import {
 import logo from "../../assets/bglogo.png"
 import ganesh from "../../assets/ganesh.jpeg"
 import Sandhiya from "../../assets/sandhya.jpeg"
-import musculoskeletal from "../../assets/bglogo.png"
+import musculoskeletal from "../../assets/IMG_1919.jpg"
 
 const About = () => {
   const stats = [
@@ -48,7 +48,7 @@ const About = () => {
     {
       name: "Dr. Ganesh",
       credentials: "MPT Sport, FIMT, MIAP",
-      role: "Founder & Chief Physiotherapist",
+      role: "Chief Physiotherapist",
       description: "Sports Physiotherapy expert specializing in Orthopedic Rehabilitation, Sports Injury Recovery, Pain Management, and Performance Optimization. With 13+ years of clinical experience, he has successfully treated thousands of patients with musculoskeletal conditions, sports injuries, and chronic pain. His evidence-based approach combines manual therapy, therapeutic exercises, and advanced rehabilitation techniques to ensure optimal recovery. FIMT & MIAP certified with a commitment to clinical excellence.",
       specializations: ["Orthopedic Rehabilitation", "Sports Injury Recovery", "Pain Management", "Performance Optimization"],
       image: ganesh,
@@ -58,9 +58,9 @@ const About = () => {
     {
       name: "Dr. Sandhiya Ganesh V",
       credentials: "MPT Neuro, FIMT, MIAP",
-      role: "Co-Founder & Senior Physiotherapist",
-      description: "Neurological Physiotherapy specialist with expertise in Stroke Rehabilitation, Parkinson's Disease, Spinal Cord Injury, and Nerve Injury Recovery. She is passionate about women's health and provides compassionate care for conditions like Pelvic Floor Dysfunction, Post-Pregnancy Rehabilitation, and Geriatric Care. FIMT & MIAP certified with a patient-first approach. She conducts periodic assessments, regular follow-ups, and customized recovery plans to ensure continuous progress. Her empathetic nature and clinical excellence make her a trusted physiotherapist for neurological and women's health conditions.",
-      specializations: ["Neurological Rehab", "Stroke Recovery", "Women's Health", "Pelvic Floor Therapy", "Geriatric Care"],
+      role: "Senior Physiotherapist",
+      description: "Neurological Physiotherapy specialist with expertise in Stroke Rehabilitation, Pediatric Rehab, Parkinson's Disease, Spinal Cord Injury, and Nerve Injury Recovery. She is passionate about women's health and provides compassionate care for conditions like Pelvic Floor Dysfunction, Post-Pregnancy Rehabilitation, and Geriatric Care. FIMT & MIAP certified with a patient-first approach. She conducts periodic assessments, regular follow-ups, and customized recovery plans to ensure continuous progress. Her empathetic nature and clinical excellence make her a trusted physiotherapist for neurological and women's health conditions.",
+      specializations: ["Neurological Rehab", "Pediatric Rehab", "Stroke Recovery", "Women's Health", "Pelvic Floor Therapy"],
       image: Sandhiya,
       color: "from-pink-500 to-rose-500",
       icon: <FaFemale />
@@ -439,7 +439,7 @@ const About = () => {
                 <img
                   src={musculoskeletal}
                   alt="PhysioWorld Care"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </motion.div>
             </div>

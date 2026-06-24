@@ -17,7 +17,7 @@ import Testimonials from './Pages/Testimonials/Testimonials'
 const App = () => {
   // Replace with your actual URLs
   const socialLinks = {
-    whatsapp: 'https://wa.me/1234567890?text=Hello%20I%20would%20like%20to%20know%20more%20about%20your%20services',
+    whatsapp: 'https://wa.me/917904818494?text=Hello%20I%20would%20like%20to%20know%20more%20about%20your%20services',
     instagram: 'https://www.instagram.com/yourusername/',
     google: 'https://g.page/yourbusiness?gm'
   }

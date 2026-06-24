@@ -23,13 +23,13 @@ const OurServices = () => {
   const categories = [
     { id: 'all', name: 'All Services', icon: <FaRegSmile /> },
     { id: 'orthopedic', name: 'Orthopedic', icon: <FaBone /> },
+    { id: 'electrotherapy', name: 'Electrotherapy', icon: <FaBolt /> },
     { id: 'sports', name: 'Sports & ACL', icon: <FaRunning /> },
     { id: 'post-surgical', name: 'Post-Surgical', icon: <FaCalendarCheck /> },
     { id: 'pain', name: 'Pain Management', icon: <FaBrain /> },
     { id: 'geriatric', name: 'Geriatric', icon: <FaUserFriends /> },
     { id: 'neurology', name: 'Neurology', icon: <FaHeartbeat /> },
     { id: 'pediatric', name: 'Pediatric', icon: <FaBaby /> },
-    { id: 'sensory', name: 'Sensory Integration', icon: <FaChild /> },
     { id: 'fitness', name: 'Fitness & Ergonomics', icon: <FaDumbbell /> },
     { id: 'homecare', name: 'Home Care', icon: <FaHome /> },
   ]
@@ -231,21 +231,6 @@ const OurServices = () => {
       badgeColor: "bg-cyan-100 text-cyan-700"
     },
 
-    // 8. SENSORY INTEGRATION
-    {
-      id: 15,
-      title: "Sensory Integration Therapy",
-      category: "sensory",
-      icon: <FaChild />,
-      description: "Special therapy for children with sensory processing difficulties including autism, ADHD, and developmental delays.",
-      focus: "Improving balance, coordination, and response to sensory input.",
-      methods: "Play-based therapy, sensory-motor activities, and vestibular training.",
-      color: "from-pink-500 to-rose-500",
-      bgColor: "bg-pink-50",
-      borderColor: "border-pink-200",
-      badgeColor: "bg-pink-100 text-pink-700"
-    },
-
     // 9. FITNESS & ERGONOMICS
     {
       id: 16,
@@ -315,6 +300,73 @@ const OurServices = () => {
       bgColor: "bg-purple-50",
       borderColor: "border-purple-200",
       badgeColor: "bg-purple-100 text-purple-700"
+    },
+
+    // ===== ELECTROTHERAPY SERVICES =====
+    {
+      id: 21,
+      title: "TENS Therapy (Transcutaneous Electrical Nerve Stimulation)",
+      category: "electrotherapy",
+      icon: <FaBolt />,
+      description: "Non-invasive pain relief using low-voltage electrical currents to block pain signals and stimulate endorphin release for effective pain management.",
+      focus: "Acute and chronic pain relief, muscle relaxation, and improved circulation.",
+      methods: "Electrode placement, frequency modulation, and intensity adjustment for optimal pain management.",
+      color: "from-yellow-500 to-orange-500",
+      bgColor: "bg-yellow-50",
+      borderColor: "border-yellow-200",
+      badgeColor: "bg-yellow-100 text-yellow-700"
+    },
+    {
+      id: 22,
+      title: "IFT Therapy (Interferential Therapy)",
+      category: "electrotherapy",
+      icon: <FaBolt />,
+      description: "Deep tissue pain relief using medium-frequency electrical currents that penetrate deep into muscles and joints for effective treatment.",
+      focus: "Musculoskeletal pain, swelling reduction, and deep tissue healing.",
+      methods: "Interferential current application, suction cup electrodes, and targeted frequency settings.",
+      color: "from-purple-500 to-pink-500",
+      bgColor: "bg-purple-50",
+      borderColor: "border-purple-200",
+      badgeColor: "bg-purple-100 text-purple-700"
+    },
+    {
+      id: 23,
+      title: "Ultrasound Therapy",
+      category: "electrotherapy",
+      icon: <FaBolt />,
+      description: "Therapeutic ultrasound using high-frequency sound waves to promote tissue healing, reduce inflammation, and relieve pain effectively.",
+      focus: "Tendonitis, bursitis, muscle spasms, and soft tissue injuries.",
+      methods: "Ultrasound applicator, sound wave penetration, and thermal/non-thermal effects.",
+      color: "from-cyan-500 to-blue-500",
+      bgColor: "bg-cyan-50",
+      borderColor: "border-cyan-200",
+      badgeColor: "bg-cyan-100 text-cyan-700"
+    },
+    {
+      id: 24,
+      title: "Traction Therapy",
+      category: "electrotherapy",
+      icon: <FaBolt />,
+      description: "Spinal decompression therapy using controlled mechanical traction to relieve pressure on spinal discs and nerve roots.",
+      focus: "Herniated discs, sciatica, neck pain, and lower back pain relief.",
+      methods: "Mechanical traction, intermittent/static traction, and controlled decompression techniques.",
+      color: "from-green-500 to-teal-500",
+      bgColor: "bg-green-50",
+      borderColor: "border-green-200",
+      badgeColor: "bg-green-100 text-green-700"
+    },
+    {
+      id: 25,
+      title: "Shortwave Diathermy",
+      category: "electrotherapy",
+      icon: <FaBolt />,
+      description: "Deep tissue heating using electromagnetic waves to increase blood flow, reduce pain, and accelerate healing in deep-seated tissues.",
+      focus: "Joint stiffness, muscle spasms, chronic inflammation, and deep tissue injuries.",
+      methods: "Capacitive/inductive field application, controlled heating, and therapeutic dosage.",
+      color: "from-red-500 to-rose-500",
+      bgColor: "bg-red-50",
+      borderColor: "border-red-200",
+      badgeColor: "bg-red-100 text-red-700"
     }
   ]
 
@@ -342,9 +394,15 @@ const OurServices = () => {
     return services.filter(s => s.category === categoryId).length
   }
 
-  // Handle book appointment click
+  // Handle book appointment click - redirects to Electrotherapy for all electrotherapy services
   const handleBookAppointment = (service) => {
-    navigate(`/appointments?service=${encodeURIComponent(service.title)}`)
+    if (service.category === 'electrotherapy') {
+      // Redirect to Electrotherapy (category name) for all electrotherapy services
+      navigate(`/appointments?service=Electrotherapy`)
+    } else {
+      // Redirect to individual service title for other services
+      navigate(`/appointments?service=${encodeURIComponent(service.title)}`)
+    }
   }
 
   return (
@@ -547,7 +605,7 @@ const OurServices = () => {
                         </div>
                       </div>
                       
-                      {/* Book Button - Updated with onClick */}
+                      {/* Book Button - Redirects to Electrotherapy for all electrotherapy services */}
                       <button 
                         onClick={() => handleBookAppointment(service)}
                         className={`w-full bg-gradient-to-r ${service.color} text-white py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group-hover:shadow-lg`}

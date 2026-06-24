@@ -19,6 +19,16 @@ import image12 from "../../assets/image07.jpeg";
 import image13 from "../../assets/clinic.png";
 import image04 from "../../assets/Gallery/IMG_1482.jpg";
 import image05 from "../../assets/sandhya.jpeg";
+import image14 from "../../assets/IMG_1931.jpg";
+import image15 from "../../assets/IMG_1919.jpg";
+import image16 from "../../assets/IMG_1928.jpg";
+import image17 from "../../assets/image10.jpeg";
+import image18 from "../../assets/IMG_1899.jpg";
+import image19 from "../../assets/push-ball.jpeg";
+import image20 from "../../assets/image11.jpeg";
+import image21 from "../../assets/image12.jpeg";
+import image22 from "../../assets/image13.jpeg";
+import image23 from "../../assets/image14.jpeg";
 import Faq from './Faq';
 
 const Gallery = () => {
@@ -39,8 +49,17 @@ const Gallery = () => {
     { id: 10, image: image11 },
     { id: 11, image: image12 },
     { id: 12, image: image13 },
-    { id: 13, image: image04 }, // image04 moved to last position
-    { id: 14, image: image05 }  // image05 added
+    { id: 13, image: image04 },
+    { id: 14, image: image14 },
+    { id: 15, image: image15 },
+    { id: 16, image: image16 },
+    { id: 17, image: image17 },
+    { id: 18, image: image18 },
+    { id: 19, image: image19 },
+    { id: 20, image: image20 },
+    { id: 21, image: image21 },
+    { id: 22, image: image22 },
+    { id: 23, image: image23 },
   ];
 
   const openLightbox = (image, index) => {

@@ -61,14 +61,13 @@ const SpecializedServices = () => {
       borderColor: "border-purple-200",
       link: "/appointments"
     },
-    // 5. SENSORY INTEGRATION
     {
       id: 5,
-      title: "Sensory Integration Therapy",
+      title: "Pediatric Physiotherapy",
       icon: <FaChild />,
-      description: "Special therapy for children with sensory processing difficulties including autism, ADHD, and developmental delays.",
-      focus: "Improving balance, coordination, and response to sensory input.",
-      methods: "Play-based therapy, sensory-motor activities, and vestibular training.",
+      description: "Therapies for children with developmental, neurological, and musculoskeletal issues.",
+      focus: "Improving motor skills, coordination, and achieving developmental milestones.",
+      methods: "Play-based therapy, gait training, and motor skill development activities.",
       color: "from-pink-500 to-rose-500",
       bgColor: "bg-pink-50",
       borderColor: "border-pink-200",

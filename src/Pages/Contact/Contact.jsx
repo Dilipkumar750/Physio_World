@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, 
+import {
+  FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock,
   FaWhatsapp, FaFacebookF, FaInstagram, FaTwitter,
   FaUser, FaCommentDots, FaPaperPlane, FaCheckCircle,
   FaArrowRight, FaHeartbeat, FaStethoscope
@@ -10,11 +10,11 @@ import {
 import logo from "../../assets/whitelogo.png";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    email: '', 
-    phone: '', 
-    message: '' 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -23,34 +23,34 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
     } else if (!/^[0-9]{10}$/.test(formData.phone.replace(/\D/g, ''))) {
       newErrors.phone = 'Please enter a valid 10-digit phone number';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const sendWhatsAppMessage = (data) => {
     const phoneNumber = '917904818494';
-    
+
     // Format the message
     const message = `📩 *New Contact Form Submission!*
 
@@ -72,33 +72,33 @@ ${data.message}
     // Encode message for WhatsApp URL
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
+
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
-      
+
       try {
         // Send data to WhatsApp
         sendWhatsAppMessage(formData);
-        
+
         // Show success message
         setIsSubmitted(true);
-        
+
         // Reset form after delay
         setTimeout(() => {
           setIsSubmitted(false);
           setIsSubmitting(false);
-          setFormData({ 
-            name: '', 
-            email: '', 
-            phone: '', 
-            message: '' 
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            message: ''
           });
         }, 3000);
       } catch (error) {
@@ -160,19 +160,19 @@ ${data.message}
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center py-12 sm:py-16 px-3 sm:px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
           className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center"
         >
-          <motion.div 
+          <motion.div
             animate={pulseAnimation}
             className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"
           >
             <FaCheckCircle className="text-white text-3xl sm:text-4xl" />
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -180,7 +180,7 @@ ${data.message}
           >
             Message Sent!
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -188,7 +188,7 @@ ${data.message}
           >
             Thank you {formData.name}!
           </motion.p>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -198,7 +198,7 @@ ${data.message}
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/">
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto bg-gradient-to-r from-[#0a2540] to-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300"
@@ -206,12 +206,12 @@ ${data.message}
                 Back to Home
               </motion.button>
             </Link>
-            <a 
-              href={`https://wa.me/${whatsappNumber}`} 
-              target="_blank" 
+            <a
+              href={`https://wa.me/${whatsappNumber}`}
+              target="_blank"
               rel="noopener noreferrer"
             >
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
@@ -229,26 +229,26 @@ ${data.message}
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-x-hidden">
       {/* Page Header with Logo - Animated */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="bg-gradient-to-r from-[#0a2540] via-teal-600 to-[#0a2540] text-white py-8 sm:py-10 md:py-12 mb-6 sm:mb-8 relative overflow-hidden"
       >
         <div className="container mx-auto px-3 sm:px-4 text-center relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex justify-center mb-2 sm:mb-3"
           >
-            <img 
-              src={logo} 
-              alt="PhysioWorld Logo" 
+            <img
+              src={logo}
+              alt="PhysioWorld Logo"
               className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain p-1 sm:p-2"
             />
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -256,7 +256,7 @@ ${data.message}
           >
             Contact Us
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -268,18 +268,18 @@ ${data.message}
       </motion.div>
 
       <div className="container mx-auto px-3 sm:px-4 pb-8 sm:pb-12">
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12"
         >
           {/* Contact Info Section - Animated */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden"
           >
-            <motion.div 
+            <motion.div
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -288,15 +288,15 @@ ${data.message}
               <h3 className="text-white text-lg sm:text-xl font-semibold">Get in Touch</h3>
               <p className="text-teal-200 text-xs sm:text-sm">We'd love to hear from you</p>
             </motion.div>
-            
+
             <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* Address */}
-              <motion.div 
+              <motion.div
                 whileHover={{ x: 10, backgroundColor: "#f9fafb" }}
                 transition={{ duration: 0.3 }}
                 className="flex items-start gap-3 sm:gap-4 cursor-pointer p-2 sm:p-3 rounded-lg transition-all duration-300"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                   className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0"
@@ -313,12 +313,12 @@ ${data.message}
               </motion.div>
 
               {/* Phone */}
-              <motion.div 
+              <motion.div
                 whileHover={{ x: 10, backgroundColor: "#f9fafb" }}
                 transition={{ duration: 0.3 }}
                 className="flex items-center gap-3 sm:gap-4 cursor-pointer p-2 sm:p-3 rounded-lg transition-all duration-300"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                   className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0"
@@ -334,12 +334,12 @@ ${data.message}
               </motion.div>
 
               {/* Email */}
-              <motion.div 
+              <motion.div
                 whileHover={{ x: 10, backgroundColor: "#f9fafb" }}
                 transition={{ duration: 0.3 }}
                 className="flex items-center gap-3 sm:gap-4 cursor-pointer p-2 sm:p-3 rounded-lg transition-all duration-300"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                   className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0"
@@ -355,12 +355,12 @@ ${data.message}
               </motion.div>
 
               {/* Working Hours */}
-              <motion.div 
+              <motion.div
                 whileHover={{ x: 10, backgroundColor: "#f9fafb" }}
                 transition={{ duration: 0.3 }}
                 className="flex items-start gap-3 sm:gap-4 cursor-pointer p-2 sm:p-3 rounded-lg transition-all duration-300"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                   className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-md flex-shrink-0"
@@ -376,16 +376,16 @@ ${data.message}
             </div>
 
             {/* WhatsApp & Social Section */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               className="border-t border-gray-100 p-4 sm:p-6 bg-gray-50"
             >
-              <motion.a 
-                href={`https://wa.me/${whatsappNumber}`} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <motion.a
+                href={`https://wa.me/${whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 shadow-md w-full text-sm sm:text-base"
@@ -394,7 +394,7 @@ ${data.message}
                 Chat on WhatsApp
               </motion.a>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -425,11 +425,11 @@ ${data.message}
           </motion.div>
 
           {/* Contact Form Section - Animated */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden"
           >
-            <motion.div 
+            <motion.div
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -441,7 +441,7 @@ ${data.message}
 
             <form onSubmit={handleSubmit} className="p-4 sm:p-6">
               {/* Name Field */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
@@ -459,13 +459,12 @@ ${data.message}
                     onChange={handleChange}
                     onFocus={() => setFocusedField('name')}
                     onBlur={() => setFocusedField(null)}
-                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
-                      errors.name ? 'border-red-500' : 'border-gray-300'
-                    } ${focusedField === 'name' ? 'ring-2 ring-teal-500' : ''}`}
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${errors.name ? 'border-red-500' : 'border-gray-300'
+                      } ${focusedField === 'name' ? 'ring-2 ring-teal-500' : ''}`}
                     placeholder="Enter your full name"
                   />
                   {focusedField === 'name' && (
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       className="absolute -top-2 -right-2 w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center text-white text-xs"
@@ -476,7 +475,7 @@ ${data.message}
                 </div>
                 <AnimatePresence>
                   {errors.name && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -488,47 +487,10 @@ ${data.message}
                 </AnimatePresence>
               </motion.div>
 
-              {/* Email Field */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mb-3 sm:mb-4"
-              >
-                <label className="block text-gray-700 font-semibold mb-1 sm:mb-2 text-xs sm:text-sm">
-                  Email Address <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField('email')}
-                    onBlur={() => setFocusedField(null)}
-                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    } ${focusedField === 'email' ? 'ring-2 ring-teal-500' : ''}`}
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <AnimatePresence>
-                  {errors.email && (
-                    <motion.p 
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="text-red-500 text-[10px] sm:text-sm mt-0.5 sm:mt-1"
-                    >
-                      {errors.email}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+
 
               {/* Phone Field */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 }}
@@ -546,15 +508,14 @@ ${data.message}
                     onChange={handleChange}
                     onFocus={() => setFocusedField('phone')}
                     onBlur={() => setFocusedField(null)}
-                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
-                      errors.phone ? 'border-red-500' : 'border-gray-300'
-                    } ${focusedField === 'phone' ? 'ring-2 ring-teal-500' : ''}`}
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${errors.phone ? 'border-red-500' : 'border-gray-300'
+                      } ${focusedField === 'phone' ? 'ring-2 ring-teal-500' : ''}`}
                     placeholder="9876543210"
                   />
                 </div>
                 <AnimatePresence>
                   {errors.phone && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -566,8 +527,46 @@ ${data.message}
                 </AnimatePresence>
               </motion.div>
 
+              {/* Email Field */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mb-3 sm:mb-4"
+              >
+                <label className="block text-gray-700 font-semibold mb-1 sm:mb-2 text-xs sm:text-sm">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${errors.email ? 'border-red-500' : 'border-gray-300'
+                      } ${focusedField === 'email' ? 'ring-2 ring-teal-500' : ''}`}
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <AnimatePresence>
+                  {errors.email && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="text-red-500 text-[10px] sm:text-sm mt-0.5 sm:mt-1"
+                    >
+                      {errors.email}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
               {/* Message Field */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
@@ -585,15 +584,14 @@ ${data.message}
                     onFocus={() => setFocusedField('message')}
                     onBlur={() => setFocusedField(null)}
                     rows="4"
-                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${
-                      errors.message ? 'border-red-500' : 'border-gray-300'
-                    } ${focusedField === 'message' ? 'ring-2 ring-teal-500' : ''}`}
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition text-xs sm:text-sm ${errors.message ? 'border-red-500' : 'border-gray-300'
+                      } ${focusedField === 'message' ? 'ring-2 ring-teal-500' : ''}`}
                     placeholder="Tell us about your query or concern..."
                   ></textarea>
                 </div>
                 <AnimatePresence>
                   {errors.message && (
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -614,9 +612,8 @@ ${data.message}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                className={`w-full bg-gradient-to-r from-[#0a2540] via-teal-600 to-[#0a2540] hover:via-cyan-500 text-white py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group ${
-                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                }`}
+                className={`w-full bg-gradient-to-r from-[#0a2540] via-teal-600 to-[#0a2540] hover:via-cyan-500 text-white py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
               >
                 {isSubmitting ? (
                   <>
@@ -639,7 +636,7 @@ ${data.message}
                   </>
                 )}
               </motion.button>
-              
+
               <p className="text-center text-gray-500 text-[10px] sm:text-xs mt-3">
                 <span className="text-red-500">*</span> Required fields • Your message will be sent via WhatsApp
               </p>
@@ -648,13 +645,13 @@ ${data.message}
         </motion.div>
 
         {/* Google Maps Section - Animated */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 sm:mt-10 md:mt-12 bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden"
         >
-          <motion.div 
+          <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -663,19 +660,19 @@ ${data.message}
             <h3 className="text-white text-lg sm:text-xl font-semibold">Find Us Here</h3>
             <p className="text-teal-200 text-xs sm:text-sm">Visit our clinic location</p>
           </motion.div>
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
             className="p-1 sm:p-2"
           >
-            <iframe 
+            <iframe
               title="PhysioWorld Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.23456789!2d80.2248231!3d13.117196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52658b49141883%3A0x319f415bc66fc3b6!2sPHYSIO%20WORLD!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-              width="100%" 
-              height="300" 
-              style={{border:0}} 
-              allowFullScreen="" 
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              allowFullScreen=""
               loading="lazy"
               className="rounded-lg"
               referrerPolicy="no-referrer-when-downgrade"
