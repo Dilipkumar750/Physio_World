@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaStar, FaQuoteLeft, FaCheckCircle, FaArrowRight, 
   FaMapMarkerAlt, FaRegClock, FaShareAlt, FaWhatsapp, 
-  FaFacebook, FaTwitter, FaHeartbeat
+  FaFacebook, FaHeartbeat
 } from 'react-icons/fa';
 
 const TestimonialsHero = () => {

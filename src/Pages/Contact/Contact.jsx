@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock,
-  FaWhatsapp, FaFacebookF, FaInstagram, FaTwitter,
+  FaWhatsapp, FaFacebookF, FaInstagram,
   FaUser, FaCommentDots, FaPaperPlane, FaCheckCircle,
   FaArrowRight, FaHeartbeat, FaStethoscope
 } from 'react-icons/fa';
@@ -403,7 +403,6 @@ ${data.message}
                 {[
                   { icon: <FaFacebookF />, color: "bg-[#1877f2]", link: "https://www.facebook.com/physioworld.tn" },
                   { icon: <FaInstagram />, color: "bg-gradient-to-r from-pink-500 to-orange-500", link: "https://www.instagram.com/physioworld.tn" },
-                  { icon: <FaTwitter />, color: "bg-[#1da1f2]", link: "#" }
                 ].map((social, index) => (
                   <motion.a
                     key={index}

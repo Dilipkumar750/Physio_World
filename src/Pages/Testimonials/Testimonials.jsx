@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   FaStar, FaQuoteLeft, FaThumbsUp, FaCalendarAlt,
   FaUser, FaMapMarkerAlt, FaRegSmile, FaArrowRight, FaPhoneAlt,
-  FaCheckCircle, FaRegHeart, FaShareAlt, FaFacebook, FaTwitter, FaWhatsapp,
+  FaCheckCircle, FaRegHeart, FaShareAlt, FaFacebook, FaWhatsapp,
   FaStethoscope, FaAward, FaUsers, FaRegCommentDots,
   FaGoogle, FaStarOfLife, FaHandHoldingHeart, FaLungs, FaBone,
   FaRunning, FaBrain, FaRegClock, FaShieldAlt, FaHeartbeat,

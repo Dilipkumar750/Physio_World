@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaYoutube, 
   FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaArrowRight,
-  FaHeart, FaShieldAlt, FaFileAlt, FaWhatsapp
+  FaHeart, FaShieldAlt, FaFileAlt, FaWhatsapp, FaGoogle
 } from 'react-icons/fa';
 import logo from "../assets/whitelogo.png";
 
@@ -30,8 +30,31 @@ const Footer = () => {
               Your trusted partner for pain-free living with expert physiotherapy care.
             </p>
             
-            {/* Social Icons */}
+            {/* Social Icons - Updated with Google and WhatsApp */}
             <div className="flex justify-center sm:justify-start space-x-2 sm:space-x-3 mt-4">
+              {/* WhatsApp */}
+              <a 
+                href="https://wa.me/917904818494" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 bg-[#1a365d] hover:bg-[#25D366] rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
+              </a>
+              
+              {/* Google Business */}
+              <a 
+                href="https://share.google/FwVXIgYyYUCMLIma7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 bg-[#1a365d] hover:bg-[#4285F4] rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+                aria-label="Google Business"
+              >
+                <FaGoogle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
+              </a>
+              
+              {/* Facebook */}
               <a 
                 href="https://www.facebook.com/physioworld.tn" 
                 target="_blank" 
@@ -41,6 +64,8 @@ const Footer = () => {
               >
                 <FaFacebookF className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
               </a>
+              
+              {/* Instagram */}
               <a 
                 href="https://www.instagram.com/physioworld.tn?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
@@ -49,33 +74,6 @@ const Footer = () => {
                 aria-label="Instagram"
               >
                 <FaInstagram className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
-              </a>
-              <a 
-                href="#" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 bg-[#1a365d] hover:bg-[#1da1f2] rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
-                aria-label="Twitter"
-              >
-                <FaTwitter className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
-              </a>
-              <a 
-                href="#" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 bg-[#1a365d] hover:bg-[#0a66c2] rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedinIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
-              </a>
-              <a 
-                href="#" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 bg-[#1a365d] hover:bg-[#ff0000] rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
-                aria-label="YouTube"
-              >
-                <FaYoutube className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-white" />
               </a>
             </div>
           </div>

@@ -11,7 +11,7 @@ import image01 from "../../assets/Gallery/IMG_1455.jpg";
 import image06 from "../../assets/Gallery/IMG_1452.jpg";
 import image02 from "../../assets/Gallery/IMG_0533.jpg";
 import image07 from "../../assets/image01.jpeg";
-import image08 from "../../assets/image02.jpeg";
+import image08 from "../../assets/IMG_1922.jpg";
 import image09 from "../../assets/image03.jpeg";
 import image10 from "../../assets/image05.jpeg";
 import image11 from "../../assets/image06.jpeg";
@@ -41,25 +41,25 @@ const Gallery = () => {
   const galleryImages = [
     { id: 1, image: image01 },
     { id: 2, image: image02 },
-    { id: 5, image: image06 },
+    { id: 5, image: image11 },
     { id: 6, image: image07 },
-    { id: 7, image: image08 },
+    { id: 7, image: image17 },
     { id: 8, image: image09 },
     { id: 9, image: image10 },
-    { id: 10, image: image11 },
+    { id: 10, image: image06 },
     { id: 11, image: image12 },
     { id: 12, image: image13 },
-    { id: 13, image: image04 },
-    { id: 14, image: image14 },
-    { id: 15, image: image15 },
+    { id: 13, image: image23 },
+    { id: 14, image: image15 },
+    { id: 15, image: image21 },
     { id: 16, image: image16 },
-    { id: 17, image: image17 },
+    { id: 17, image: image14 },
     { id: 18, image: image18 },
     { id: 19, image: image19 },
     { id: 20, image: image20 },
-    { id: 21, image: image21 },
+    { id: 21, image: image08 },
     { id: 22, image: image22 },
-    { id: 23, image: image23 },
+    { id: 23, image: image04 },
   ];
 
   const openLightbox = (image, index) => {
